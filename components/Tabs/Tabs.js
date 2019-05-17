@@ -1,14 +1,57 @@
 class TabLink {
-  constructor(tabElement){
-    // assign this.tabElement to the tabElement DOM reference
-    // this.tabElement;
+  constructor(tabElement) {
+    // console.log(this) // dataset['tab'] 
+    this.tabElement = tabElement;
+    this.tabData = this.tabElement.getAttribute('data-tab');
     
-    // Get the `data-tab` value from this.tabElement and store it here
-    // this.tabData = ; 
-    
-    // We need to find out if a user clicked 'all' cards or a specific category.  Follow the instructions below to accomplish this task:    
-    
-    /* <- Delete this comment block when you work on the if statement
+    if (this.tabData === "all") {
+      this.cards = document.querySelectorAll('.card');
+    } else {
+      this.cards = document.querySelectorAll(`.card[data-tab="${this.tabData}"]`);
+    }
+  
+    this.cards = Array.from(this.cards).map(elem => new TabCard(elem));
+    this.tabElement.addEventListener("click", () => this.selectTab());
+  }
+
+  selectTab(){
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(elem =>{
+      elem.classList.remove('active-tab')
+    })
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(elem=>{
+      elem.style.display = 'none'
+    })
+    this.tabElement.classList.add("active-tab");
+   
+    this.cards.forEach(card => card.selectCard());
+  }
+}
+
+class TabCard {
+  constructor(cardElement){
+    // Assign this.cardElement to the cardElement DOM reference
+    this.cardElement = cardElement;
+  }
+  selectCard(){
+    // Update the style of this.cardElement to display = "flex"
+    this.cardElement.style.display = 'flex';
+  }
+
+}
+
+// assign this.tabElement to the tabElement DOM reference
+// this.tabElement;
+
+// Get the `data-tab` value from this.tabElement and store it here
+// this.tabData = ;
+
+// We need to find out if a user clicked 'all' cards or a specific category.
+//Follow the instructions below to accomplish this task:
+
+/* <- Delete this comment block when you work on the if statement
     // Check to see if this.tabData is equal to 'all'
     if(){
       // If `all` is true, select all cards regardless of their data attribute values
@@ -19,7 +62,10 @@ class TabLink {
     }
     /* <- Delete this comment block when you work on the if statement
 
-     // Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element into a new instance of the TabCard class. Pass in a card object to the TabCard class. 
+     // Map over the newly converted NodeList we just created in our if statement above. 
+     //Convert each this.cards element into a new instance of the TabCard class. 
+     //Pass in a card object to the TabCard class. 
+
     // this.cards = Array.from(this.cards).map();
 
     // Add a click event that invokes this.selectTab
@@ -43,10 +89,12 @@ class TabLink {
     // Add a class of ".active-tab" to this.tabElement
     // this.tabElement;
   
-    // Notice we are looping through the this.cards array and invoking selectCard() from the TabCard class. Just un-comment the code and study what is happening here.
+    // Notice we are looping through the this.cards array and invoking selectCard() from the TabCard class. 
+    // Just un-comment the code and study what is happening here.
     // this.cards.forEach(card => card.selectCard());
   }
 }
+
 
 class TabCard {
   constructor(cardElement){
@@ -69,4 +117,7 @@ class TabCard {
 - In your .forEach() method's callback function, return a new instance of TabLink and pass in each tab as a parameter
 
 */
-let tabs = document.querySelectorAll();
+let tabs = document.querySelectorAll(".tab");
+tabs.forEach(ele => {
+  new TabLink(ele);
+});
