@@ -1,3 +1,5 @@
+
+
 class Carousel {
   constructor(element) {
     this.element = element;
@@ -14,6 +16,7 @@ class Carousel {
     }else{
       this.currentImage = this.currentImage  + 1  
     }
+    TweenMax.from('.cImg', 1, {opacity: 0, scale: .5, x: '300px'})
      this.images[this.currentImage].style.display = 'block'
   }
   leftBar(){
@@ -23,6 +26,7 @@ class Carousel {
     }else{
       this.currentImage  = this.currentImage  - 1  
     }
+    TweenMax.from('.cImg', 1, {opacity: 0, scale: .5, x: '-300px'})
     this.images[this.currentImage].style.display = 'block'
   }
 
