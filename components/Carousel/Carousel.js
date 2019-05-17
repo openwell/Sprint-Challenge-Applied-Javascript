@@ -2,10 +2,10 @@
 
 class Carousel {
   constructor(element) {
-    this.element = element;
-    this.right = element.querySelector(".right-button").addEventListener('click', ()=> this.rightBar())
-    this.left = element.querySelector(".left-button").addEventListener('click', ()=> this.leftBar())
-    this.images = element.querySelectorAll("img");
+     this.element = element;
+    this.right = this.element.querySelector(".right-button").addEventListener('click', ()=> this.rightBar())
+    this.left = this.element.querySelector(".left-button").addEventListener('click', ()=> this.leftBar())
+    this.images = this.element.querySelectorAll("img");
     this.currentImage = 0
     this.images[this.currentImage].style.display = 'block'
   }
@@ -16,7 +16,7 @@ class Carousel {
     }else{
       this.currentImage = this.currentImage  + 1  
     }
-    TweenMax.from('.cImg', 1, {opacity: 0, scale: .5, x: '300px'})
+    TweenMax.from('.cImg', 1, {x: '1184px',opacity: 0})
      this.images[this.currentImage].style.display = 'block'
   }
   leftBar(){
@@ -26,7 +26,7 @@ class Carousel {
     }else{
       this.currentImage  = this.currentImage  - 1  
     }
-    TweenMax.from('.cImg', 1, {opacity: 0, scale: .5, x: '-300px'})
+    TweenMax.from('.cImg', 1, {x: '-1184px',opacity: 0})
     this.images[this.currentImage].style.display = 'block'
   }
 
