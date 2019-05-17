@@ -1,8 +1,28 @@
 class TabLink {
   constructor(tabElement) {
     this.tabElement = tabElement;
-
+    this.tabData = this.tabElement.getAttribute(`data-tab`);
+    if (this.tabData === "all") {
+      this.cards = this.tabData;
+    } else {
+      this.cards;
+    }
+    this.cards = Array.from(this.cards).map(elem => new TabCard(elem));
+    this.tabElement.addEventListener("click", () => this.selectTab);
   }
+  selectTab(){}
+}
+
+class TabCard {
+  constructor(cardElement){
+    // Assign this.cardElement to the cardElement DOM reference
+    // this.cardElement;
+  }
+  selectCard(){
+    // Update the style of this.cardElement to display = "flex"
+    // this.cardElement;
+  }
+
 }
 
 // assign this.tabElement to the tabElement DOM reference
@@ -11,7 +31,8 @@ class TabLink {
 // Get the `data-tab` value from this.tabElement and store it here
 // this.tabData = ;
 
-// We need to find out if a user clicked 'all' cards or a specific category.  Follow the instructions below to accomplish this task:
+// We need to find out if a user clicked 'all' cards or a specific category.
+//Follow the instructions below to accomplish this task:
 
 /* <- Delete this comment block when you work on the if statement
     // Check to see if this.tabData is equal to 'all'
@@ -24,7 +45,10 @@ class TabLink {
     }
     /* <- Delete this comment block when you work on the if statement
 
-     // Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element into a new instance of the TabCard class. Pass in a card object to the TabCard class. 
+     // Map over the newly converted NodeList we just created in our if statement above. 
+     //Convert each this.cards element into a new instance of the TabCard class. 
+     //Pass in a card object to the TabCard class. 
+
     // this.cards = Array.from(this.cards).map();
 
     // Add a click event that invokes this.selectTab
