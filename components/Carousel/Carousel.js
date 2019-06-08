@@ -1,35 +1,52 @@
-
-
 class Carousel {
   constructor(element) {
-     this.element = element;
-    this.right = this.element.querySelector(".right-button").addEventListener('click', ()=> this.rightBar())
-    this.left = this.element.querySelector(".left-button").addEventListener('click', ()=> this.leftBar())
+    this.element = element;
+    this.right = this.element
+      .querySelector(".right-button")
+      .addEventListener("click", () => this.rightBar());
+    this.left = this.element
+      .querySelector(".left-button")
+      .addEventListener("click", () => this.leftBar());
     this.images = this.element.querySelectorAll("img");
-    this.currentImage = 0
-    this.images[this.currentImage].style.display = 'block'
+    this.currentImage = 0;
+    this.images[this.currentImage].style.display = "block";
+    this.moving = false;
   }
-  rightBar(){
-    this.images[this.currentImage].style.display = 'none'
-    if(this.currentImage >= this.images.length - 1 ){
-        this.currentImage = 0
-    }else{
-      this.currentImage = this.currentImage  + 1  
+  rightBar() {
+    if (!this.moving) {
+      this.moving = true;
+      this.images[this.currentImage].style.display = "none";
+      if (this.currentImage >= this.images.length - 1) {
+        this.currentImage = 0;
+      } else {
+        this.currentImage = this.currentImage + 1;
+      }
+      TweenMax.from(".cImg", 1, { x: "1184px", opacity: 0 });
+      this.images[this.currentImage].style.display = "block";
+      setTimeout(()=> {
+        this.moving = false;
+        console.log('hi', this.moving )
+      }, 1000);
     }
-    TweenMax.from('.cImg', 1, {x: '1184px',opacity: 0})
-     this.images[this.currentImage].style.display = 'block'
   }
-  leftBar(){
-    this.images[this.currentImage].style.display = 'none'
-    if(this.currentImage <= 0){
-        this.currentImage = this.images.length - 1
-    }else{
-      this.currentImage  = this.currentImage  - 1  
+ 
+  leftBar() {
+    if (!this.moving) {
+      this.moving = true;
+      this.images[this.currentImage].style.display = "none";
+      if (this.currentImage <= 0) {
+        this.currentImage = this.images.length - 1;
+      } else {
+        this.currentImage = this.currentImage - 1;
+      }
+      TweenMax.from(".cImg", 1, { x: "-1184px", opacity: 0 });
+      this.images[this.currentImage].style.display = "block";
+      setTimeout(()=> {
+        this.moving = false;
+        console.log('hi', this.moving )
+      }, 1000);
     }
-    TweenMax.from('.cImg', 1, {x: '-1184px',opacity: 0})
-    this.images[this.currentImage].style.display = 'block'
   }
-
 }
 
 let carousel = document.querySelector(".carousel");
